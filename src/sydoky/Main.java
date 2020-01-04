@@ -3,11 +3,9 @@ package sydoky;
 public class Main {
 
     public static void main(String[] args) {
-        Field field = new Field();
-        field.showField();
+//        Field field = new EasyLevelField();
+        Field field = new HardLevelField();
         field.startSolution();
-        System.out.println();
-        field.showField();
     }
 }
 
