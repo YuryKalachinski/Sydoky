@@ -1,10 +1,9 @@
 package sydoky;
 
 abstract class Field {
-    private static final int SIZE_FIELD = 9;
-    private static final int SIZE_CELLS_BLOCK = 3;
+    private final int sizeField = 9;
     private boolean isAllNumbersAreFilled = false;
-    private Cell[][] cells = new Cell[SIZE_FIELD][SIZE_FIELD];
+    private Cell[][] cells = new Cell[sizeField][sizeField];
     private CellsStack stackCells = new CellsStack();
 
     Field() {
@@ -47,7 +46,7 @@ abstract class Field {
     }
 
     private boolean checkCellByHorizontal(Cell cell) {
-        for (int i = 0; i < SIZE_FIELD; i++) {
+        for (int i = 0; i < sizeField; i++) {
             if (cell.getValue() == cells[cell.getY()][i].getValue() && cell.getX()!=i) {
                 return false;
             }
@@ -56,7 +55,7 @@ abstract class Field {
     }
 
     private boolean checkCellByVertical(Cell cell) {
-        for (int i = 0; i < SIZE_FIELD; i++) {
+        for (int i = 0; i < sizeField; i++) {
             if (cell.getValue() == cells[i][cell.getX()].getValue() && cell.getY()!=i) {
                 return false;
             }
@@ -65,10 +64,11 @@ abstract class Field {
     }
 
     private boolean checkCellBySquare(Cell cell) {
-        int x = cell.getX() / SIZE_CELLS_BLOCK;
-        int y = cell.getY() / SIZE_CELLS_BLOCK;
-        for (int i = 0; i < SIZE_CELLS_BLOCK; i++) {
-            for (int j = 0; j < SIZE_CELLS_BLOCK; j++) {
+        int sizeCellsBlock = 3;
+        int x = cell.getX() / sizeCellsBlock;
+        int y = cell.getY() / sizeCellsBlock;
+        for (int i = 0; i < sizeCellsBlock; i++) {
+            for (int j = 0; j < sizeCellsBlock; j++) {
                 if (cell.getValue() == cells[3 * y + i][3 * x + j].getValue() && cell != cells[3 * y + i][3 * x + j]){
                     return false;
                 }
@@ -84,11 +84,11 @@ abstract class Field {
             cell.setValue('1');
             return cell;
         }
-        if (x == SIZE_FIELD - 1 && y == SIZE_FIELD - 1) {
+        if (x == sizeField - 1 && y == sizeField - 1) {
             isAllNumbersAreFilled = true;
             return null;
         }
-        if (x == SIZE_FIELD - 1) {
+        if (x == sizeField - 1) {
             y++;
             x = 0;
         } else {
@@ -98,17 +98,17 @@ abstract class Field {
     }
 
     private void initCells() {
-        for (int i = 0; i < SIZE_FIELD; i++) {
-            for (int j = 0; j < SIZE_FIELD; j++) {
+        for (int i = 0; i < sizeField; i++) {
+            for (int j = 0; j < sizeField; j++) {
                 cells[i][j] = new Cell(i,j);
             }
         }
     }
 
     private void showField() {
-        for (int i = 0; i < SIZE_FIELD; i++) {
+        for (int i = 0; i < sizeField; i++) {
             System.out.print("| ");
-            for (int j = 0; j < SIZE_FIELD; j++) {
+            for (int j = 0; j < sizeField; j++) {
                 System.out.print(cells[i][j].getValue() + " | ");
             }
             System.out.println();
